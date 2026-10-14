@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground: #f4f4f5;
+  --background: #09090b;
+}
+
+body {
+  color: var(--foreground);
+  background-color: #09090b;
+  direction: rtl;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  min-height: 100vh;
+}
+
+input, button, select, textarea {
+  user-select: auto;
+}
+
+/* Subtle, Minimalist Scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #27272a;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3f3f46;
+}
+
+/* Professional Card & Surface Utility */
+.pro-card {
+  background-color: #111018;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1rem;
+}
+
+.pro-card-hover {
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.pro-card-hover:hover {
+  border-color: rgba(167, 139, 250, 0.25);
+  background-color: #171522;
+}
+
+.pro-input {
+  background-color: #111018;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #f4f4f5;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.pro-input:focus {
+  outline: none;
+  border-color: #8b5cf6;
+  box-shadow: 0 0 0 1px #8b5cf6;
+}
