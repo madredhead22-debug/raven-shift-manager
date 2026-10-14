@@ -17,6 +17,7 @@ import {
   Sparkles,
   ArrowLeftRight,
 } from 'lucide-react';
+import { RavenFeather, RavenNestIcon } from './RavenIcons';
 import { Employee, ShiftSlot, Role, PendingSwap } from '@/lib/types';
 import { formatDate, getSundayOfWeek } from '@/lib/dateUtils';
 
@@ -428,7 +429,7 @@ export default function ScheduleTab({
             disabled={loadingAction === 'auto_assign'}
             className="text-xs font-semibold text-white bg-purple-600 hover:bg-purple-500 active:scale-98 px-3 py-1.5 rounded-lg transition-colors flex items-center space-x-1 space-x-reverse disabled:opacity-50"
           >
-            <Sparkles className="w-3.5 h-3.5 ml-1 text-purple-200" />
+            <RavenFeather className="w-3.5 h-3.5 ml-1 text-purple-200" />
             <span>שיבוץ שוויוני אוטומטי</span>
           </button>
         </div>

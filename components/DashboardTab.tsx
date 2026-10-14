@@ -13,6 +13,7 @@ import {
   Palmtree,
   CheckCircle2,
 } from 'lucide-react';
+import { RavenLogo, RavenFeather, RavenNestIcon } from './RavenIcons';
 import { Employee, ShiftSlot, Role, RecentShiftRecord } from '@/lib/types';
 import WhatsAppModal from './WhatsAppModal';
 
@@ -149,12 +150,18 @@ export default function DashboardTab({
       {/* Overview Stats Card */}
       <div className="pro-card p-4">
         <div className="flex items-center justify-between mb-3">
-          <div>
-            <h2 className="text-xs font-semibold text-zinc-200">סטטוס משמרות שבועי</h2>
-            <p className="text-[11px] text-zinc-500">חנות 2 • שבוע נוכחי</p>
+          <div className="flex items-center space-x-2 space-x-reverse">
+            <div className="w-7 h-7 rounded-lg bg-purple-950/60 border border-purple-800/50 flex items-center justify-center text-purple-400">
+              <RavenNestIcon className="w-4 h-4" />
+            </div>
+            <div>
+              <h2 className="text-xs font-bold text-zinc-100">סטטוס הקן השבועי</h2>
+              <p className="text-[10px] text-purple-300/70 font-medium">Ravenest • One team One nest</p>
+            </div>
           </div>
-          <span className="text-[10px] font-mono text-zinc-400 bg-zinc-900 border border-zinc-800 px-2 py-0.5 rounded-md">
-            מדידה שוטפת
+          <span className="text-[10px] font-mono text-zinc-400 bg-zinc-900 border border-zinc-800 px-2 py-0.5 rounded-md flex items-center space-x-1 space-x-reverse">
+            <RavenFeather className="w-2.5 h-2.5 ml-1 text-purple-400" />
+            <span>סבב פעיל</span>
           </span>
         </div>
 
@@ -187,16 +194,16 @@ export default function DashboardTab({
       <div className="pro-card p-4">
         <div className="flex items-center justify-between mb-2.5">
           <div className="flex items-center space-x-1.5 space-x-reverse">
-            <History className="w-3.5 h-3.5 text-zinc-400 ml-1" />
-            <h3 className="text-xs font-semibold text-zinc-200">משמרות אחרונות שבוצעו</h3>
+            <History className="w-3.5 h-3.5 text-purple-400 ml-1" />
+            <h3 className="text-xs font-semibold text-zinc-200">משמרות אחרונות בקן</h3>
           </div>
-          <span className="text-[10px] text-zinc-500">חנות 2</span>
+          <span className="text-[10px] text-zinc-500 font-mono">חנות 2</span>
         </div>
 
         <div className="grid grid-cols-2 gap-2">
           {/* Last Worker */}
           <div className="bg-[#171522] border border-zinc-800/90 rounded-xl p-2.5">
-            <span className="text-[9px] uppercase tracking-wider text-zinc-500 block mb-1">
+            <span className="text-[9px] uppercase tracking-wider text-purple-400/80 block mb-1">
               אחרון שביצע:
             </span>
             {lastShiftWorker ? (
@@ -210,7 +217,7 @@ export default function DashboardTab({
                 </div>
               </div>
             ) : (
-              <p className="text-[11px] text-zinc-600">אין נתונים</p>
+              <p className="text-[10px] text-zinc-600">טרם תועדו משמרות</p>
             )}
           </div>
 
@@ -230,7 +237,7 @@ export default function DashboardTab({
                 </div>
               </div>
             ) : (
-              <p className="text-[11px] text-zinc-600">אין נתונים</p>
+              <p className="text-[10px] text-zinc-600">טרם תועדו משמרות</p>
             )}
           </div>
         </div>
@@ -309,11 +316,21 @@ export default function DashboardTab({
       {/* Fairness Ranking Table */}
       <div className="pro-card p-4">
         <div className="flex items-center justify-between mb-2.5">
-          <h3 className="text-xs font-semibold text-zinc-200">מדד שוויון משמרות</h3>
-          <span className="text-[10px] text-zinc-500">מצטבר</span>
+          <div className="flex items-center space-x-1.5 space-x-reverse">
+            <RavenFeather className="w-3.5 h-3.5 text-purple-400 ml-1" />
+            <h3 className="text-xs font-semibold text-zinc-200">מדד שוויון משמרות בקן</h3>
+          </div>
+          <span className="text-[10px] text-zinc-500 font-mono">מצטבר</span>
         </div>
 
-        <div className="space-y-1.5">
+        {sortedEmployees.length === 0 ? (
+          <div className="p-4 bg-zinc-900/40 border border-zinc-800/60 rounded-xl text-center space-y-1">
+            <RavenNestIcon className="w-6 h-6 mx-auto text-purple-400 mb-1 opacity-70" />
+            <p className="text-xs font-semibold text-zinc-300">הקן ממתין לעובדים</p>
+            <p className="text-[10px] text-zinc-500">עבור ללשונית "צוות הקן" כדי להוסיף את עובדי החנות הראשונים</p>
+          </div>
+        ) : (
+          <div className="space-y-1.5">
           {sortedEmployees.map((emp, index) => {
             const isLowest = !emp.onLeave && emp.store2ShiftCount === minCount;
             const isMe = emp.id === currentUserId;
@@ -362,6 +379,7 @@ export default function DashboardTab({
             );
           })}
         </div>
+        )}
       </div>
 
       {/* WhatsApp Modal */}

@@ -1,7 +1,8 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Feather, User, Shield, KeyRound, AlertCircle, ArrowLeft } from 'lucide-react';
+import { User, Shield, KeyRound, AlertCircle, ArrowLeft } from 'lucide-react';
+import { RavenLogo, RavenFeather } from './RavenIcons';
 import { Employee } from '@/lib/types';
 
 interface LoginViewProps {
@@ -57,16 +58,31 @@ export default function LoginView({ employees, onLoginSuccess }: LoginViewProps)
   };
 
   return (
-    <div className="flex-1 flex flex-col justify-center px-4 py-8 bg-[#09090b]">
-      {/* Brand Header */}
+    <div className="flex-1 flex flex-col justify-center px-4 py-8 bg-[#07070a]">
+      {/* Ravenest Hero Emblem */}
       <div className="text-center mb-6">
-        <div className="w-12 h-12 mx-auto mb-3 bg-[#111018] rounded-xl flex items-center justify-center border border-zinc-700/60 shadow-subtle">
-          <Feather className="w-6 h-6 text-purple-400" />
+        <div className="relative inline-block mb-3">
+          <div className="w-16 h-16 mx-auto bg-gradient-to-br from-[#1a1728] via-[#120f1e] to-[#07070a] rounded-2xl flex items-center justify-center border border-purple-700/40 shadow-[0_0_25px_rgba(139,92,246,0.25)]">
+            <RavenLogo className="w-10 h-10" />
+          </div>
+          <span className="absolute -bottom-1 -right-1 bg-purple-900/80 border border-purple-600/50 p-1 rounded-full text-purple-300">
+            <RavenFeather className="w-3 h-3" />
+          </span>
         </div>
-        <h2 className="text-xl font-bold tracking-widest text-zinc-100 font-mono">
-          RAVEN
+
+        <h2 className="text-2xl font-black tracking-wider text-zinc-100 font-mono">
+          Ravenest
         </h2>
-        <p className="text-xs text-zinc-400 mt-1">מערכת ניהול משמרות • חנות 2</p>
+        <div className="flex items-center justify-center space-x-1.5 space-x-reverse mt-1">
+          <span className="text-xs font-semibold text-purple-400 font-mono tracking-widest uppercase">
+            One team
+          </span>
+          <span className="text-xs text-zinc-600">•</span>
+          <span className="text-xs font-semibold text-purple-300 font-mono tracking-widest uppercase">
+            One nest
+          </span>
+        </div>
+        <p className="text-[10px] text-zinc-500 mt-0.5">מערכת חכמה לסידור ואיזון משמרות • חנות 2</p>
       </div>
 
       {/* Role Toggle */}

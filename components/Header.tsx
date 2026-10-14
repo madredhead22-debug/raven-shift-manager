@@ -1,7 +1,8 @@
 'use client';
 
 import React from 'react';
-import { Feather, LogOut, Shield, User } from 'lucide-react';
+import { LogOut, Shield, User } from 'lucide-react';
+import { RavenLogo, RavenFeather } from './RavenIcons';
 import { Role } from '@/lib/types';
 
 interface HeaderProps {
@@ -16,18 +17,25 @@ interface HeaderProps {
 
 export default function Header({ user, onLogout }: HeaderProps) {
   return (
-    <header className="sticky top-0 z-40 bg-[#0c0a13]/90 backdrop-blur-md border-b border-zinc-800/80 px-4 py-3 flex items-center justify-between">
+    <header className="sticky top-0 z-40 bg-[#090810]/95 backdrop-blur-md border-b border-purple-900/30 px-4 py-2.5 flex items-center justify-between">
       {/* Brand */}
       <div className="flex items-center space-x-2.5 space-x-reverse">
-        <div className="w-8 h-8 rounded-lg bg-zinc-900 border border-zinc-700/60 flex items-center justify-center">
-          <Feather className="w-4 h-4 text-purple-400" />
+        <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#1a1728] to-[#0d0b14] border border-purple-800/40 flex items-center justify-center shadow-[0_0_12px_rgba(139,92,246,0.15)]">
+          <RavenLogo className="w-6 h-6" />
         </div>
         <div>
           <div className="flex items-center space-x-1.5 space-x-reverse">
-            <h1 className="font-bold text-xs tracking-widest text-zinc-100 font-mono">RAVEN</h1>
-            <span className="text-[10px] text-zinc-500 font-medium">| חנות 2</span>
+            <h1 className="font-extrabold text-sm tracking-wider text-zinc-100 font-mono">
+              Ravenest
+            </h1>
+            <span className="text-[9px] bg-purple-950/80 text-purple-300 border border-purple-800/50 px-1.5 py-0.2 rounded font-medium">
+              חנות 2
+            </span>
           </div>
-          <p className="text-[10px] text-zinc-400">ניהול ואיזון משמרות</p>
+          <p className="text-[9.5px] text-purple-300/70 font-medium tracking-wide flex items-center space-x-1 space-x-reverse">
+            <RavenFeather className="w-2.5 h-2.5 inline ml-0.5 text-purple-400" />
+            <span>One team • One nest</span>
+          </p>
         </div>
       </div>
 

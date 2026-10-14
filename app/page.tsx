@@ -58,7 +58,7 @@ export default function Home() {
     } catch {
       // ignore
     }
-    showToast(`ברוך הבא למערכת העורב, ${loggedInUser.name}!`, 'success');
+    showToast(`ברוך הבא ל-Ravenest, ${loggedInUser.name}! • One team One nest`, 'success');
   };
 
   const handleLogout = () => {

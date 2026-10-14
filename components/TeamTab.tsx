@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { UserPlus, Users, Trash2, KeyRound, Check, X, Palmtree } from 'lucide-react';
+import { RavenFeather, RavenNestIcon } from './RavenIcons';
 import { Employee } from '@/lib/types';
 
 interface TeamTabProps {
@@ -32,7 +33,7 @@ export default function TeamTab({ employees, onRefresh, onShowToast }: TeamTabPr
       if (!res.ok) throw new Error(data.error);
 
       setNewEmployeeName('');
-      onShowToast(data.message || 'העובד נוסף בהצלחה', 'success');
+      onShowToast(data.message || 'העובד נוסף בהצלחה לקן', 'success');
       onRefresh();
     } catch (err: any) {
       onShowToast(err.message, 'error');
@@ -43,7 +44,7 @@ export default function TeamTab({ employees, onRefresh, onShowToast }: TeamTabPr
 
   // Delete employee
   const handleDeleteEmployee = async (emp: Employee) => {
-    if (!confirm(`האם להסיר את "${emp.name}" מהמערכת?`)) return;
+    if (!confirm(`האם להסיר את "${emp.name}" מהקן?`)) return;
 
     try {
       const res = await fetch(`/api/employees?id=${emp.id}`, { method: 'DELETE' });
@@ -101,12 +102,12 @@ export default function TeamTab({ employees, onRefresh, onShowToast }: TeamTabPr
     let alignOnReturn = true;
     if (emp.onLeave) {
       alignOnReturn = confirm(
-        `האם להחזיר את "${emp.name}" מחופשה וליישר את מונה המשמרות שלו לסבב הנוכחי (למינימום של יתר העובדים) כדי שלא יצטרך להשלים משמרות?`
+        `האם להחזיר את "${emp.name}" מחופשה לקן וליישר את מונה המשמרות שלו לסבב הנוכחי (למינימום של יתר העובדים) כדי שלא יצטרך להשלים משמרות?`
       );
     } else {
       if (
         !confirm(
-          `האם להגדיר את "${emp.name}" בסטטוס חופשה?\nהעובד לא ישובץ אוטומטית עד שתחזיר אותו מחופשה.`
+          `האם להגדיר את "${emp.name}" בסטטוס חופשה מחוץ לקן?\nהעובד לא ישובץ אוטומטית עד שתחזיר אותו.`
         )
       ) {
         return;
@@ -137,9 +138,9 @@ export default function TeamTab({ employees, onRefresh, onShowToast }: TeamTabPr
     <div className="p-4 space-y-3.5">
       {/* Add New Employee Card */}
       <div className="pro-card p-4">
-        <h3 className="text-xs font-semibold text-zinc-200 flex items-center space-x-1.5 space-x-reverse mb-1">
-          <UserPlus className="w-3.5 h-3.5 text-zinc-400 ml-1" />
-          <span>הוספת עובד חדש</span>
+        <h3 className="text-xs font-bold text-zinc-200 flex items-center space-x-1.5 space-x-reverse mb-1">
+          <RavenFeather className="w-3.5 h-3.5 text-purple-400 ml-1" />
+          <span>הוספת עובד לקן</span>
         </h3>
         <p className="text-[10px] text-zinc-500 mb-3">
           הזן שם בלבד. העובד יתווסף עם קוד PIN התחלתי <span className="font-mono text-zinc-300">123456</span>.
@@ -148,7 +149,7 @@ export default function TeamTab({ employees, onRefresh, onShowToast }: TeamTabPr
         <form onSubmit={handleAddEmployee} className="flex space-x-2 space-x-reverse">
           <input
             type="text"
-            placeholder="שם עובד..."
+            placeholder="שם עובד חדש..."
             value={newEmployeeName}
             onChange={(e) => setNewEmployeeName(e.target.value)}
             className="flex-1 p-2 bg-zinc-900 border border-zinc-800 rounded-lg text-xs text-zinc-100 placeholder:text-zinc-600 focus:outline-none focus:border-purple-500"
@@ -156,9 +157,10 @@ export default function TeamTab({ employees, onRefresh, onShowToast }: TeamTabPr
           <button
             type="submit"
             disabled={loading || !newEmployeeName.trim()}
-            className="px-3.5 py-2 bg-purple-600 hover:bg-purple-500 active:scale-98 disabled:opacity-50 text-white font-semibold text-xs rounded-lg transition-colors whitespace-nowrap"
+            className="px-3.5 py-2 bg-purple-600 hover:bg-purple-500 active:scale-98 disabled:opacity-50 text-white font-semibold text-xs rounded-lg transition-colors whitespace-nowrap flex items-center space-x-1 space-x-reverse"
           >
-            {loading ? 'מוסיף...' : 'הוסף'}
+            <UserPlus className="w-3 h-3 ml-1" />
+            <span>{loading ? 'מוסיף...' : 'הוסף לקן'}</span>
           </button>
         </form>
       </div>
@@ -166,10 +168,12 @@ export default function TeamTab({ employees, onRefresh, onShowToast }: TeamTabPr
       {/* Employees List */}
       <div className="pro-card p-4">
         <div className="flex items-center justify-between mb-3">
-          <h3 className="text-xs font-semibold text-zinc-200 flex items-center space-x-1.5 space-x-reverse">
-            <Users className="w-3.5 h-3.5 text-zinc-400 ml-1" />
-            <span>צוות עובדים ({employees.length})</span>
-          </h3>
+          <div className="flex items-center space-x-1.5 space-x-reverse">
+            <RavenNestIcon className="w-4 h-4 text-purple-400 ml-1" />
+            <h3 className="text-xs font-bold text-zinc-200">
+              צוות הקן ({employees.length})
+            </h3>
+          </div>
           <div className="flex items-center space-x-2 space-x-reverse text-[10px] font-mono text-zinc-400">
             <span>פעילים: {employees.filter((e) => !e.onLeave).length}</span>
             {employees.some((e) => e.onLeave) && (
@@ -180,7 +184,16 @@ export default function TeamTab({ employees, onRefresh, onShowToast }: TeamTabPr
           </div>
         </div>
 
-        <div className="space-y-1.5">
+        {employees.length === 0 ? (
+          <div className="p-6 bg-zinc-900/30 border border-zinc-800/60 rounded-xl text-center space-y-1.5">
+            <RavenNestIcon className="w-7 h-7 mx-auto text-purple-400 opacity-60 mb-1" />
+            <p className="text-xs font-semibold text-zinc-300">הקן עדיין ריק</p>
+            <p className="text-[10px] text-zinc-500">
+              הוסף את עובדי החנות הראשונים בטופס למעלה כדי להתחיל בסבב השיבוצים
+            </p>
+          </div>
+        ) : (
+          <div className="space-y-1.5">
           {employees.map((emp) => (
             <div
               key={emp.id}
@@ -280,6 +293,7 @@ export default function TeamTab({ employees, onRefresh, onShowToast }: TeamTabPr
             </div>
           ))}
         </div>
+        )}
       </div>
     </div>
   );

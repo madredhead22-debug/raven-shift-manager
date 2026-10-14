@@ -1,7 +1,8 @@
 'use client';
 
 import React from 'react';
-import { LayoutDashboard, Calendar, Users } from 'lucide-react';
+import { LayoutDashboard } from 'lucide-react';
+import { RavenFeather, RavenNestIcon } from './RavenIcons';
 import { Role } from '@/lib/types';
 
 interface BottomNavProps {
@@ -19,7 +20,7 @@ export default function BottomNav({
 }: BottomNavProps) {
   return (
     <nav className="fixed bottom-0 left-0 right-0 z-40 flex justify-center pointer-events-none">
-      <div className="w-full max-w-md bg-[#0c0a13]/95 backdrop-blur-md border-t border-zinc-800/80 shadow-elevated flex items-center justify-around py-2 px-3 pointer-events-auto">
+      <div className="w-full max-w-md bg-[#090810]/95 backdrop-blur-md border-t border-purple-900/40 shadow-elevated flex items-center justify-around py-2 px-3 pointer-events-auto">
         {/* Dashboard */}
         <button
           onClick={() => onTabChange('dashboard')}
@@ -45,8 +46,8 @@ export default function BottomNav({
             currentTab === 'schedule' ? 'text-purple-400 font-semibold' : 'text-zinc-500 hover:text-zinc-300'
           }`}
         >
-          <Calendar className="w-4 h-4 mb-0.5" />
-          <span className="text-[10px]">לוח שבועי</span>
+          <RavenFeather className="w-4 h-4 mb-0.5" />
+          <span className="text-[10px]">לוח משמרות</span>
         </button>
 
         {/* Team (Admin) */}
@@ -57,8 +58,8 @@ export default function BottomNav({
               currentTab === 'team' ? 'text-purple-400 font-semibold' : 'text-zinc-500 hover:text-zinc-300'
             }`}
           >
-            <Users className="w-4 h-4 mb-0.5" />
-            <span className="text-[10px]">ניהול צוות</span>
+            <RavenNestIcon className="w-4 h-4 mb-0.5" />
+            <span className="text-[10px]">צוות הקן</span>
           </button>
         )}
       </div>

@@ -4,6 +4,7 @@ import { Employee, ShiftSlot, ShiftType, PendingSwap, RecentShiftRecord } from '
 
 interface DatabaseSchema {
   adminPin: string;
+  adminName?: string;
   employees: Employee[];
   shifts: Record<string, ShiftSlot>; // key: shiftId
 }
@@ -19,44 +20,8 @@ const DEFAULT_SHIFTS_CONFIG: { type: ShiftType; name: string; start: string; end
 
 const INITIAL_DB: DatabaseSchema = {
   adminPin: '590590',
-  employees: [
-    {
-      id: 'emp-1',
-      name: 'יוסי',
-      pin: '123456',
-      role: 'employee',
-      store2ShiftCount: 3,
-      active: true,
-      createdAt: new Date().toISOString(),
-    },
-    {
-      id: 'emp-2',
-      name: 'דניאל',
-      pin: '123456',
-      role: 'employee',
-      store2ShiftCount: 2,
-      active: true,
-      createdAt: new Date().toISOString(),
-    },
-    {
-      id: 'emp-3',
-      name: 'נועה',
-      pin: '123456',
-      role: 'employee',
-      store2ShiftCount: 4,
-      active: true,
-      createdAt: new Date().toISOString(),
-    },
-    {
-      id: 'emp-4',
-      name: 'שיר',
-      pin: '123456',
-      role: 'employee',
-      store2ShiftCount: 2,
-      active: true,
-      createdAt: new Date().toISOString(),
-    },
-  ],
+  adminName: 'מנהל מערכת',
+  employees: [],
   shifts: {},
 };
 
@@ -617,36 +582,6 @@ export async function getRecentCompletedShifts(): Promise<RecentShiftRecord[]> {
       if (records.length >= 5) break;
     }
     if (records.length >= 5) break;
-  }
-
-  // If no assigned shifts in db.shifts yet, create initial realistic historical records
-  if (records.length === 0 && db.employees.length >= 2) {
-    const today = new Date();
-    const yesterday = new Date(today);
-    yesterday.setDate(today.getDate() - 1);
-    const dayBefore = new Date(today);
-    dayBefore.setDate(today.getDate() - 2);
-
-    return [
-      {
-        employeeId: db.employees[2]?.id || 'emp-3',
-        employeeName: db.employees[2]?.name || 'נועה',
-        date: formatDate(yesterday),
-        dayOfWeek: yesterday.getDay(),
-        shiftName: 'צהריים',
-        shiftType: 'afternoon',
-        isLatest: true,
-      },
-      {
-        employeeId: db.employees[0]?.id || 'emp-1',
-        employeeName: db.employees[0]?.name || 'יוסי',
-        date: formatDate(dayBefore),
-        dayOfWeek: dayBefore.getDay(),
-        shiftName: 'בוקר',
-        shiftType: 'morning',
-        isLatest: false,
-      },
-    ];
   }
 
   return records;

@@ -2,8 +2,8 @@ import type { Metadata, Viewport } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'RAVEN • ניהול משמרות חנות 2',
-  description: 'מערכת מקצועית לסידור ואיזון משמרות',
+  title: 'Ravenest • One team One nest',
+  description: 'Ravenest — ניהול ואיזון משמרות חכם • One team One nest',
   icons: {
     icon: '/favicon.ico',
   },
