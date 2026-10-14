@@ -18,7 +18,7 @@ const DEFAULT_SHIFTS_CONFIG: { type: ShiftType; name: string; start: string; end
 ];
 
 const INITIAL_DB: DatabaseSchema = {
-  adminPin: '9999',
+  adminPin: '590590',
   employees: [
     {
       id: 'emp-1',
@@ -81,7 +81,7 @@ async function writeDataFile(data: DatabaseSchema): Promise<void> {
 export async function getAdminPin(): Promise<string> {
   if (process.env.ADMIN_PIN) return process.env.ADMIN_PIN;
   const db = await ensureDataFile();
-  return db.adminPin || '9999';
+  return db.adminPin || '590590';
 }
 
 export async function updateAdminPin(newPin: string): Promise<void> {

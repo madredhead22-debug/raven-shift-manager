@@ -152,7 +152,7 @@ export default function LoginView({ employees, onLoginSuccess }: LoginViewProps)
           </div>
         ) : (
           <div className="p-2.5 bg-zinc-900/60 border border-zinc-800 rounded-lg text-xs text-zinc-300">
-            כניסה כמנהל מערכת (PIN ברירת מחדל: 9999)
+            כניסה מאובטחת כמנהל מערכת
           </div>
         )}
 
@@ -165,7 +165,7 @@ export default function LoginView({ employees, onLoginSuccess }: LoginViewProps)
               type="password"
               inputMode="numeric"
               maxLength={10}
-              placeholder={roleMode === 'employee' ? '123456' : '9999'}
+              placeholder={roleMode === 'employee' ? 'קוד PIN (לדוגמה 123456)' : 'הזן קוד PIN סודי'}
               value={pin}
               onChange={(e) => setPin(e.target.value)}
               className="w-full p-2.5 pr-9 bg-zinc-900 border border-zinc-800 rounded-lg text-xs font-mono tracking-widest text-center text-zinc-100 placeholder:text-zinc-600 focus:outline-none focus:border-purple-500"
